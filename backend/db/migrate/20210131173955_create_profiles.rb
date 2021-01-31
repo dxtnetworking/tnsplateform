@@ -5,8 +5,8 @@ class CreateProfiles < ActiveRecord::Migration[6.0]
       t.string :niveau_etude
       t.string :occupation_actuelle
       t.text :attentes_networking
-      t.boolean :membre_equipe_pilote
-      t.string :statut
+      t.boolean :membre_equipe_pilote, default: false
+      t.string :statut, limit: 10
       t.date :date_adhesion
       t.date :date_resiliation
       t.text :motif_resiliation
