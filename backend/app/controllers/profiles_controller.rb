@@ -16,6 +16,7 @@ class ProfilesController < ApplicationController
   # POST /profiles
   def create
     @profile = Profile.new(profile_params)
+    # debugger
 
     if @profile.save
       render json: @profile, status: :created, location: @profile
