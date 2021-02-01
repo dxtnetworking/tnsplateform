@@ -10,10 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_31_161355) do
+ActiveRecord::Schema.define(version: 2021_02_01_104759) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "profiles", force: :cascade do |t|
+    t.text "adresse"
+    t.string "photo_url"
+    t.string "niveau_etude"
+    t.string "profession"
+    t.string "occupation_actuelle"
+    t.text "attentes_networking"
+    t.boolean "membre_equipe_pilote", default: false
+    t.string "statut", limit: 10
+    t.date "date_adhesion"
+    t.date "date_resiliation"
+    t.text "motif_resiliation"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "provider", default: "email", null: false
@@ -40,4 +58,5 @@ ActiveRecord::Schema.define(version: 2021_01_31_161355) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "profiles", "users"
 end
