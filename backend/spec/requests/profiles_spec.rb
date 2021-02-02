@@ -1,31 +1,16 @@
 require 'rails_helper'
 
 
-RSpec.describe "/profiles", type: :request do
+RSpec.describe "/profiles", type: :request do  
+  
+  let(:valid_attributes) { build(:profile).attributes }
 
-  current_user = User.first_or_create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
-  
-  
-  let(:valid_attributes) do
-    { 
-      :adresse => "Rue 10, Pikine, Dakar, Senegal", :photo_url => "https://randomuser.me/api/portraits/men/91.jpg", 
-      :niveau_etude => "Bac+5", :profession => "project manager", 
-      :occupation_actuelle => "employé", 
-      :attentes_networking => "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...", 
-      :membre_equipe_pilote => true, 
-      :statut => "actif", :date_adhesion => nil, 
-      :date_resiliation => nil, 
-      :motif_resiliation => nil, :user_id => current_user.id
+  let(:invalid_attributes) do 
+    {
+      niveau_etude: nil,
+      occupation_actuelle: nil
     }
   end
-
-  let(:invalid_attributes) {
-    { 
-      :niveau_etude => nil,
-      :occupation_actuelle => nil, 
-      :user => nil 
-    }
-  }
 
 
   let(:valid_headers) {
@@ -100,7 +85,7 @@ RSpec.describe "/profiles", type: :request do
           :membre_equipe_pilote => true, 
           :statut => "actif", :date_adhesion => nil, 
           :date_resiliation => nil, 
-          :motif_resiliation => nil, :user_id => current_user.id
+          :motif_resiliation => nil, :user_id => FactoryBot.create(:user).id
         }
       }
 
