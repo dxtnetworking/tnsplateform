@@ -1,8 +1,10 @@
+require 'faker'
+
 FactoryBot.define do
   factory :profile do
-    adresse { "Sacre-coeur 1, Dakar" }
+    adresse { Faker::Address.name }
     photo_url { "https://randomuser.me/api/portraits/men/91.jpg" }
-    niveau_etude { "Master" }
+    niveau_etude { Faker::String.random(length: [3, 6]) }
     profession { "project manager" }
     occupation_actuelle { "employé" }
     attentes_networking { "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor..." }
