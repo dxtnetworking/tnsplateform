@@ -17,11 +17,13 @@ RSpec.describe "/telephones", type: :request do
   # Telephone. As you add validations to Telephone, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    build(:telephone).attributes
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      numero: nil
+    }
   }
 
   # This should return the minimal set of values that should be in the headers
@@ -29,7 +31,7 @@ RSpec.describe "/telephones", type: :request do
   # TelephonesController, or in your router and rack
   # middleware. Be sure to keep this updated too.
   let(:valid_headers) {
-    {}
+    { "Content-Type": "application/json; charset=utf-8" }
   }
 
   describe "GET /index" do
@@ -61,7 +63,7 @@ RSpec.describe "/telephones", type: :request do
         post telephones_url,
              params: { telephone: valid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:created)
-        expect(response.content_type).to match(a_string_including("application/json"))
+        expect(response.content_type).to match(a_string_including("application/json; charset=utf-8"))
       end
     end
 
@@ -77,7 +79,7 @@ RSpec.describe "/telephones", type: :request do
         post telephones_url,
              params: { telephone: invalid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(response.content_type).to eq("application/json")
+        expect(response.content_type).to eq("application/json; charset=utf-8")
       end
     end
   end
@@ -85,7 +87,7 @@ RSpec.describe "/telephones", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        build(:telephone).attributes
       }
 
       it "updates the requested telephone" do
@@ -93,7 +95,7 @@ RSpec.describe "/telephones", type: :request do
         patch telephone_url(telephone),
               params: { telephone: new_attributes }, headers: valid_headers, as: :json
         telephone.reload
-        skip("Add assertions for updated state")
+        expect(response).to have_http_status(:ok)
       end
 
       it "renders a JSON response with the telephone" do
@@ -101,7 +103,7 @@ RSpec.describe "/telephones", type: :request do
         patch telephone_url(telephone),
               params: { telephone: new_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:ok)
-        expect(response.content_type).to match(a_string_including("application/json"))
+        expect(response.content_type).to match(a_string_including("application/json; charset=utf-8"))
       end
     end
 
@@ -111,7 +113,7 @@ RSpec.describe "/telephones", type: :request do
         patch telephone_url(telephone),
               params: { telephone: invalid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(response.content_type).to eq("application/json")
+        expect(response.content_type).to eq("application/json; charset=utf-8")
       end
     end
   end

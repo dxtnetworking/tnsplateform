@@ -47,7 +47,7 @@ RSpec.describe "/experiences", type: :request do
         post experiences_url,
              params: { experience: valid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:created)
-        expect(response.content_type).to match(a_string_including("application/json; charset=utf-8;"))
+        expect(response.content_type).to match(a_string_including("application/json; charset=utf-8"))
       end
     end
 
@@ -63,7 +63,7 @@ RSpec.describe "/experiences", type: :request do
         post experiences_url,
              params: { experience: invalid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(response.content_type).to eq("application/json; charset=utf-8;")
+        expect(response.content_type).to eq("application/json; charset=utf-8")
       end
     end
   end
@@ -87,7 +87,7 @@ RSpec.describe "/experiences", type: :request do
         patch experience_url(experience),
               params: { experience: new_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:ok)
-        expect(response.content_type).to match(a_string_including("application/json; charset=utf-8;"))
+        expect(response.content_type).to match(a_string_including("application/json; charset=utf-8"))
       end
     end
 
@@ -97,7 +97,7 @@ RSpec.describe "/experiences", type: :request do
         patch experience_url(experience),
               params: { experience: invalid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(response.content_type).to eq("application/json; charset=utf-8;")
+        expect(response.content_type).to eq("application/json; charset=utf-8")
       end
     end
   end
