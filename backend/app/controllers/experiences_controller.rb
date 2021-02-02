@@ -3,6 +3,9 @@ class ExperiencesController < ApplicationController
 
   # GET /experiences
   def index
+    
+    # TODO Lister seulement, experiences du profile concerne
+    
     @experiences = Experience.all
 
     render json: @experiences
