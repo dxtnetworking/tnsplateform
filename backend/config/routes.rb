@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :telephones
   resources :experiences
   resources :formations
   resources :profiles
