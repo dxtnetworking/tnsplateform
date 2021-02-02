@@ -1,6 +1,8 @@
+require "faker"
+
 FactoryBot.define do
   factory :pay do
-    nom { "MyString" }
-    code_iso { "MyString" }
+    nom { Faker::Name.name }
+    code_iso { "ABC" }
   end
 end
