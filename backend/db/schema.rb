@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_01_232554) do
+ActiveRecord::Schema.define(version: 2021_02_02_160228) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "experiences", force: :cascade do |t|
+    t.string "titre_poste", null: false
+    t.text "description", null: false
+    t.boolean "poste_actuel", default: true
+    t.string "type_poste", null: false
+    t.string "nom_societe"
+    t.string "localisation", null: false
+    t.date "debut_occupation_poste", null: false
+    t.date "fin_occupation_poste"
+    t.bigint "profile_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["profile_id"], name: "index_experiences_on_profile_id"
+  end
 
   create_table "formations", force: :cascade do |t|
     t.string "intitule", null: false
@@ -72,6 +87,7 @@ ActiveRecord::Schema.define(version: 2021_02_01_232554) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "experiences", "profiles"
   add_foreign_key "formations", "profiles"
   add_foreign_key "profiles", "users"
 end
