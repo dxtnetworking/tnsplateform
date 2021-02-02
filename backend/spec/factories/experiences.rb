@@ -8,6 +8,6 @@ FactoryBot.define do
     localisation { "MyString" }
     debut_occupation_poste { "2021-02-02" }
     fin_occupation_poste { "2021-02-02" }
-    profile { nil }
+    profile_id { FactoryBot.create(:profile).id }
   end
 end

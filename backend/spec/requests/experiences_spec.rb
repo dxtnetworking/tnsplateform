@@ -17,19 +17,25 @@ RSpec.describe "/experiences", type: :request do
   # Experience. As you add validations to Experience, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    build(:experience).attributes
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      titre_poste: nil,
+      description: nil,
+      type_poste: nil
+    }
   }
+  
+  
 
   # This should return the minimal set of values that should be in the headers
   # in order to pass any filters (e.g. authentication) defined in
   # ExperiencesController, or in your router and rack
   # middleware. Be sure to keep this updated too.
   let(:valid_headers) {
-    {}
+    { "Content-Type": "application/json; charset=utf-8" }
   }
 
   describe "GET /index" do
@@ -61,7 +67,7 @@ RSpec.describe "/experiences", type: :request do
         post experiences_url,
              params: { experience: valid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:created)
-        expect(response.content_type).to match(a_string_including("application/json"))
+        expect(response.content_type).to match(a_string_including("application/json; charset=utf-8"))
       end
     end
 
@@ -77,7 +83,7 @@ RSpec.describe "/experiences", type: :request do
         post experiences_url,
              params: { experience: invalid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(response.content_type).to eq("application/json")
+        expect(response.content_type).to eq("application/json; charset=utf-8")
       end
     end
   end
@@ -85,7 +91,7 @@ RSpec.describe "/experiences", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        build(:experience).attributes
       }
 
       it "updates the requested experience" do
@@ -93,7 +99,7 @@ RSpec.describe "/experiences", type: :request do
         patch experience_url(experience),
               params: { experience: new_attributes }, headers: valid_headers, as: :json
         experience.reload
-        skip("Add assertions for updated state")
+        expect(response).to have_http_status(:ok)
       end
 
       it "renders a JSON response with the experience" do
@@ -101,7 +107,7 @@ RSpec.describe "/experiences", type: :request do
         patch experience_url(experience),
               params: { experience: new_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:ok)
-        expect(response.content_type).to match(a_string_including("application/json"))
+        expect(response.content_type).to match(a_string_including("application/json; charset=utf-8"))
       end
     end
 
@@ -111,7 +117,7 @@ RSpec.describe "/experiences", type: :request do
         patch experience_url(experience),
               params: { experience: invalid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(response.content_type).to eq("application/json")
+        expect(response.content_type).to eq("application/json; charset=utf-8")
       end
     end
   end

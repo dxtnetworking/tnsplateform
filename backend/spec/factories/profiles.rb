@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :profile do
     adresse { Faker::Address.name }
     photo_url { "https://randomuser.me/api/portraits/men/91.jpg" }
-    niveau_etude { Faker::String.random(length: [3, 6]) }
+    niveau_etude { Faker::Name.name }
     profession { "project manager" }
     occupation_actuelle { "employé" }
     attentes_networking { "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor..." }

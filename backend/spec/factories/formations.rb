@@ -2,8 +2,8 @@ require 'faker'
 
 FactoryBot.define do
   factory :formation do
-    intitule { Faker::String.random(length: [10, 20]) }
-    niveau { Faker::String.random(length: [3, 6]) }
+    intitule { Faker::Name.name }
+    niveau { Faker::Name.name }
     specialisation { nil }
     nom_institution { Faker::University.name }
     localisation { Faker::Address.city }
