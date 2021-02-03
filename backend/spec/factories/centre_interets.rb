@@ -1,6 +1,5 @@
 FactoryBot.define do
   factory :centre_interet do
-    nom { "MyString" }
-    profile { "" }
+    nom { Faker::Name.name }
   end
 end
