@@ -5,5 +5,5 @@ class Formation < ApplicationRecord
   validates :niveau, presence: true, allow_blank: false
   validates :nom_institution, presence: true, allow_blank: false
   validates :localisation, presence: true, allow_blank: false
-  validates :localisation, presence: true, allow_blank: false  
+  validates :debut_formation, presence: true, allow_blank: false  
 end
