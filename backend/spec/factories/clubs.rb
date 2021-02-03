@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :club do
-    nom { "MyString" }
-    ville { nil }
+    nom { Faker::Company.name }
+    ville_id { FactoryBot.create(:ville).id }
   end
 end
