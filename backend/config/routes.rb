@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :habilites_extra_pros
   resources :centre_interets
   resources :profile_socials
   resources :reseau_socials
