@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_02_234249) do
+ActiveRecord::Schema.define(version: 2021_02_03_010036) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "clubs", force: :cascade do |t|
+    t.string "nom", null: false
+    t.bigint "ville_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ville_id"], name: "index_clubs_on_ville_id"
+  end
+
+  create_table "clubs_profiles", id: false, force: :cascade do |t|
+    t.bigint "club_id", null: false
+    t.bigint "profile_id", null: false
+    t.index ["club_id", "profile_id"], name: "index_clubs_profiles_on_club_id_and_profile_id"
+    t.index ["profile_id", "club_id"], name: "index_clubs_profiles_on_profile_id_and_club_id"
+  end
 
   create_table "experiences", force: :cascade do |t|
     t.string "titre_poste", null: false
@@ -111,6 +126,7 @@ ActiveRecord::Schema.define(version: 2021_02_02_234249) do
     t.index ["pay_id"], name: "index_villes_on_pay_id"
   end
 
+  add_foreign_key "clubs", "villes"
   add_foreign_key "experiences", "profiles"
   add_foreign_key "formations", "profiles"
   add_foreign_key "profiles", "users"
