@@ -1,0 +1,2 @@
+class CentreInteret < ApplicationRecord
+end
