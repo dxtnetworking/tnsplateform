@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :reseau_socials
   resources :clubs
   resources :villes
   resources :pays
