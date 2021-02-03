@@ -8,6 +8,7 @@ class Profile < ApplicationRecord
   
   has_and_belongs_to_many :clubs
   has_and_belongs_to_many :centre_interets
+  has_and_belongs_to_many :habilites_extra_pros
   
   validates :niveau_etude, presence: true, allow_blank: false
   validates :occupation_actuelle, presence: true, allow_blank: false
