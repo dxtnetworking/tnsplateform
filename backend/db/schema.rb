@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_03_130810) do
+ActiveRecord::Schema.define(version: 2021_02_03_134208) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,16 @@ ActiveRecord::Schema.define(version: 2021_02_03_130810) do
     t.string "code_iso", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "profile_socials", force: :cascade do |t|
+    t.string "lien_profile", null: false
+    t.bigint "profile_id", null: false
+    t.bigint "reseau_social_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["profile_id"], name: "index_profile_socials_on_profile_id"
+    t.index ["reseau_social_id"], name: "index_profile_socials_on_reseau_social_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -136,6 +146,8 @@ ActiveRecord::Schema.define(version: 2021_02_03_130810) do
   add_foreign_key "clubs", "villes"
   add_foreign_key "experiences", "profiles"
   add_foreign_key "formations", "profiles"
+  add_foreign_key "profile_socials", "profiles"
+  add_foreign_key "profile_socials", "reseau_socials"
   add_foreign_key "profiles", "users"
   add_foreign_key "telephones", "profiles"
   add_foreign_key "villes", "pays"
