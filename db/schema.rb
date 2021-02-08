@@ -12,9 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2021_02_03_211345) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "centre_interets", force: :cascade do |t|
     t.string "nom", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -22,23 +19,23 @@ ActiveRecord::Schema.define(version: 2021_02_03_211345) do
   end
 
   create_table "centre_interets_profiles", id: false, force: :cascade do |t|
-    t.bigint "centre_interet_id", null: false
-    t.bigint "profile_id", null: false
+    t.integer "centre_interet_id", null: false
+    t.integer "profile_id", null: false
     t.index ["centre_interet_id", "profile_id"], name: "index_interets_profiles_on_interet_id_and_profile_id"
     t.index ["profile_id", "centre_interet_id"], name: "index_profiles_interets_on_interet_id_and_profile_id"
   end
 
   create_table "clubs", force: :cascade do |t|
     t.string "nom", null: false
-    t.bigint "ville_id", null: false
+    t.integer "ville_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["ville_id"], name: "index_clubs_on_ville_id"
   end
 
   create_table "clubs_profiles", id: false, force: :cascade do |t|
-    t.bigint "club_id", null: false
-    t.bigint "profile_id", null: false
+    t.integer "club_id", null: false
+    t.integer "profile_id", null: false
     t.index ["club_id", "profile_id"], name: "index_clubs_profiles_on_club_id_and_profile_id"
     t.index ["profile_id", "club_id"], name: "index_clubs_profiles_on_profile_id_and_club_id"
   end
@@ -52,7 +49,7 @@ ActiveRecord::Schema.define(version: 2021_02_03_211345) do
     t.string "localisation", null: false
     t.date "debut_occupation_poste", null: false
     t.date "fin_occupation_poste"
-    t.bigint "profile_id", null: false
+    t.integer "profile_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["profile_id"], name: "index_experiences_on_profile_id"
@@ -66,7 +63,7 @@ ActiveRecord::Schema.define(version: 2021_02_03_211345) do
     t.string "localisation", null: false
     t.date "debut_formation", null: false
     t.date "fin_formation"
-    t.bigint "profile_id", null: false
+    t.integer "profile_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["profile_id"], name: "index_formations_on_profile_id"
@@ -80,8 +77,8 @@ ActiveRecord::Schema.define(version: 2021_02_03_211345) do
   end
 
   create_table "habilites_extra_pros_profiles", id: false, force: :cascade do |t|
-    t.bigint "habilites_extra_pro_id", null: false
-    t.bigint "profile_id", null: false
+    t.integer "habilites_extra_pro_id", null: false
+    t.integer "profile_id", null: false
     t.index ["habilites_extra_pro_id", "profile_id"], name: "index_habilites_profiles_on_habilites_id_and_profile_id"
     t.index ["profile_id", "habilites_extra_pro_id"], name: "index_profiles_habilites_on_habilites_id_and_profile_id"
   end
@@ -95,8 +92,8 @@ ActiveRecord::Schema.define(version: 2021_02_03_211345) do
 
   create_table "profile_socials", force: :cascade do |t|
     t.string "lien_profile", null: false
-    t.bigint "profile_id", null: false
-    t.bigint "reseau_social_id", null: false
+    t.integer "profile_id", null: false
+    t.integer "reseau_social_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["profile_id"], name: "index_profile_socials_on_profile_id"
@@ -105,7 +102,6 @@ ActiveRecord::Schema.define(version: 2021_02_03_211345) do
 
   create_table "profiles", force: :cascade do |t|
     t.text "adresse"
-    t.string "photo_url"
     t.string "niveau_etude"
     t.string "profession"
     t.string "occupation_actuelle"
@@ -115,7 +111,7 @@ ActiveRecord::Schema.define(version: 2021_02_03_211345) do
     t.date "date_adhesion"
     t.date "date_resiliation"
     t.text "motif_resiliation"
-    t.bigint "user_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"
@@ -131,7 +127,7 @@ ActiveRecord::Schema.define(version: 2021_02_03_211345) do
   create_table "telephones", force: :cascade do |t|
     t.boolean "numero_principal", default: false
     t.string "numero", null: false
-    t.bigint "profile_id", null: false
+    t.integer "profile_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["profile_id"], name: "index_telephones_on_profile_id"
@@ -164,7 +160,7 @@ ActiveRecord::Schema.define(version: 2021_02_03_211345) do
 
   create_table "villes", force: :cascade do |t|
     t.string "nom", null: false
-    t.bigint "pay_id", null: false
+    t.integer "pay_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["pay_id"], name: "index_villes_on_pay_id"

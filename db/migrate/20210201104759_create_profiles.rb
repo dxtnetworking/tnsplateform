@@ -2,7 +2,6 @@ class CreateProfiles < ActiveRecord::Migration[6.0]
   def change
     create_table :profiles do |t|
       t.text :adresse
-      t.string :photo_url
       t.string :niveau_etude
       t.string :profession
       t.string :occupation_actuelle

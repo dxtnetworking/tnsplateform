@@ -3,7 +3,6 @@ require 'faker'
 FactoryBot.define do
   factory :profile do
     adresse { Faker::Address.name }
-    photo_url { "https://randomuser.me/api/portraits/men/91.jpg" }
     niveau_etude { Faker::Name.name }
     profession { "project manager" }
     occupation_actuelle { "employé" }

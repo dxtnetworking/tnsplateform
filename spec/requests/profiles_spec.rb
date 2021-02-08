@@ -76,18 +76,7 @@ RSpec.describe "/profiles", type: :request do
 
   describe "PATCH /update" do
     context "with valid parameters" do
-      let(:new_attributes) {
-        { 
-          :adresse => "Sacre-Coeur 1, Dakar, Senegal", :photo_url => "https://randomuser.me/api/portraits/men/91.jpg", 
-          :niveau_etude => "Bac+5", :profession => "chef d'entreprise", 
-          :occupation_actuelle => "employeur", 
-          :attentes_networking => "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor...", 
-          :membre_equipe_pilote => true, 
-          :statut => "actif", :date_adhesion => nil, 
-          :date_resiliation => nil, 
-          :motif_resiliation => nil, :user_id => FactoryBot.create(:user).id
-        }
-      }
+      let(:new_attributes) { build(:profile).attributes }
 
       it "updates the requested profile" do
         profile = Profile.create! valid_attributes
