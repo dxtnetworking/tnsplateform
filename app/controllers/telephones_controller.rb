@@ -15,7 +15,7 @@ class TelephonesController < ApplicationController
 
   # PATCH/PUT /telephones/1
   def update
-    if @telephone.update(telephone_params)
+    if @telephone.update(telephone_params) && is_current_profile?
       render json: @telephone
     else
       render json: @telephone.errors, status: :unprocessable_entity
@@ -35,6 +35,10 @@ class TelephonesController < ApplicationController
 
     def set_profile
       @profile = Profile.find(params[:id])
+    end
+
+    def is_current_profile?
+      current_user.id == @profile.user.id
     end
 
     # Only allow a trusted parameter "white list" through.

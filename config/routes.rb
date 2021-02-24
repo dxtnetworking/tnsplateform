@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :villes
   resources :pays
   
-  resources :profiles, only: [:index, :show, :update] do
+  resources :profiles, only: [:index, :create, :show, :update] do
     resources :telephones, only: [:create, :update, :destroy]
     resources :experiences, only: [:create, :update, :destroy]
     resources :formations, only: [:create, :update, :destroy]
