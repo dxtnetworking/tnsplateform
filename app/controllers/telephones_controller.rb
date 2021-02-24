@@ -1,21 +1,10 @@
 class TelephonesController < ApplicationController
-  before_action :set_telephone, only: [:show, :update, :destroy]
-
-  # GET /telephones
-  def index
-    @telephones = Telephone.all
-
-    render json: @telephones
-  end
-
-  # GET /telephones/1
-  def show
-    render json: @telephone
-  end
+  before_action :set_profile
+  before_action :set_telephone, only: [:delete, :update]
 
   # POST /telephones
   def create
-    @telephone = Telephone.new(telephone_params)
+    @telephone = @profile.telephones.new(telephone_params)
 
     if @telephone.save
       render json: @telephone, status: :created, location: @telephone
@@ -41,7 +30,11 @@ class TelephonesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_telephone
-      @telephone = Telephone.find(params[:id])
+      @telephone = @profile.telephones.find(params[:id])
+    end
+
+    def set_profile
+      @profile = Profile.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

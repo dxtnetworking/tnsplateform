@@ -1,21 +1,10 @@
 class FormationsController < ApplicationController
-  before_action :set_formation, only: [:show, :update, :destroy]
-
-  # GET /formations
-  def index
-    @formations = Formation.all
-
-    render json: @formations
-  end
-
-  # GET /formations/1
-  def show
-    render json: @formation
-  end
+  before_action :set_profile
+  before_action :set_formation, only: [:update, :destroy]
 
   # POST /formations
-  def create
-    @formation = Formation.new(formation_params)
+def create
+    @formation = @profile.formations.new(formation_params)
 
     if @formation.save
       render json: @formation, status: :created, location: @formation
@@ -40,8 +29,12 @@ class FormationsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_profile
+      @profile = Profile.find(params[:id])
+    end
+    
     def set_formation
-      @formation = Formation.find(params[:id])
+      @formation = @profile.formations.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

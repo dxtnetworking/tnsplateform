@@ -1,24 +1,11 @@
 class ExperiencesController < ApplicationController
-  before_action :set_experience, only: [:show, :update, :destroy]
+  before_action :set_profile
+  before_action :set_experience, only: [:update, :destroy]
 
-  # GET /experiences
-  def index
-    
-    # TODO Lister seulement, experiences du profile concerne
-    
-    @experiences = Experience.all
-
-    render json: @experiences
-  end
-
-  # GET /experiences/1
-  def show
-    render json: @experience
-  end
-
+  
   # POST /experiences
   def create
-    @experience = Experience.new(experience_params)
+    @experience = @profile.experiences.new(experience_params)
 
     if @experience.save
       render json: @experience, status: :created, location: @experience
@@ -43,8 +30,12 @@ class ExperiencesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_profile
+      @profile = Profile.find(params[:id])
+    end
+    
     def set_experience
-      @experience = Experience.find(params[:id])
+      @experience = @profile.experiences.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.

@@ -1,5 +1,8 @@
 class ProfilesController < ApplicationController
-  before_action :set_profile, only: [:show, :update, :destroy]
+  # before_action :authenticate_user!
+  # before_action :set_user
+  before_action :set_profile, only: [:show, :update]
+  # before_action :update_authorization, only: [:update]
 
   # GET /profiles
   def index
@@ -13,31 +16,20 @@ class ProfilesController < ApplicationController
     render json: @profile
   end
 
-  # POST /profiles
-  def create
-    @profile = Profile.new(profile_params)
-    # debugger
-
-    if @profile.save
-      render json: @profile, status: :created, location: @profile
-    else
-      render json: @profile.errors, status: :unprocessable_entity
-    end
-  end
-
   # PATCH/PUT /profiles/1
   def update
-    if @profile.update(profile_params)
-      render json: @profile
+    if current_user.profile.update profile_params
+      render json: @profile 
+      # redirect_to :show 
     else
       render json: @profile.errors, status: :unprocessable_entity
     end
   end
 
   # DELETE /profiles/1
-  def destroy
-    @profile.destroy
-  end
+  # def destroy
+  #   @profile.destroy
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -47,6 +39,27 @@ class ProfilesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def profile_params
-      params.require(:profile).permit(:adresse, :photo_url, :niveau_etude, :profession, :occupation_actuelle, :attentes_networking, :membre_equipe_pilote, :statut, :date_adhesion, :date_resiliation, :motif_resiliation, :user_id)
+      params.require(:profile).permit(
+        :adresse, 
+        :photo_url, 
+        :niveau_etude, 
+        :profession, 
+        :occupation_actuelle, 
+        :attentes_networking, 
+        :membre_equipe_pilote, 
+        :statut, 
+        :date_adhesion, 
+        :date_resiliation, 
+        :motif_resiliation, 
+        :user_id)
     end
+
+    def update_authorization
+      current_user.id == @profile.user_id
+    end
+
+    def set_user
+      @user = current_user
+    end
+    
 end

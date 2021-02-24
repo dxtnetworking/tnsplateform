@@ -12,6 +12,6 @@ FactoryBot.define do
     date_adhesion { "2020-02-01" }
     date_resiliation { nil }
     motif_resiliation { nil }   
-    user_id { FactoryBot.create(:user).id }
+    # user_id { FactoryBot.create(:user).id }
   end
 end
