@@ -2,7 +2,7 @@ class ProfilesController < ApplicationController
   # before_action :authenticate_user!
   # before_action :set_user
   before_action :set_profile, only: [:show, :update]
-  # before_action :update_authorization, only: [:update]
+  before_action :update_authorization, only: [:update]
 
   # GET /profiles
   def index
@@ -10,6 +10,18 @@ class ProfilesController < ApplicationController
 
     render json: @profiles
   end
+
+  # POST /profiles
+  def create
+    @profile = @current_user.profile.new(profile_params)
+
+    if @profile.save
+      render json: @profile, status: :created, location: @profile
+    else
+      render json: @profile.errors, status: :unprocessable_entity
+    end
+  end
+
 
   # GET /profiles/1
   def show
@@ -37,6 +49,14 @@ class ProfilesController < ApplicationController
       @profile = Profile.find(params[:id])
     end
 
+    def set_user
+      @user = current_user
+    end
+
+    def update_authorization
+      current_user.id == @profile.user_id
+    end
+
     # Only allow a trusted parameter "white list" through.
     def profile_params
       params.require(:profile).permit(
@@ -53,13 +73,4 @@ class ProfilesController < ApplicationController
         :motif_resiliation, 
         :user_id)
     end
-
-    def update_authorization
-      current_user.id == @profile.user_id
-    end
-
-    def set_user
-      @user = current_user
-    end
-    
 end
