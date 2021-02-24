@@ -8,6 +8,6 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
   
   has_one :profile, dependent: :destroy
-  before_create :build_profile
-  accepts_nested_attributes_for :profile#, reject_if: ->(attributes){ attributes['name'].blank? }, allow_destroy: true
+  # before_create :build_profile
+  # accepts_nested_attributes_for :profile#, reject_if: ->(attributes){ attributes['name'].blank? }, allow_destroy: true
 end
